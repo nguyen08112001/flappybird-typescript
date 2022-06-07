@@ -1,5 +1,5 @@
 import SpriteImage from './Image'
-// import { ctx } from '../main'
+
 const cvs = document.getElementById('gamezone') as HTMLCanvasElement;
 const ctx = cvs.getContext('2d') as CanvasRenderingContext2D; 
 
@@ -42,4 +42,6 @@ class GameStatus extends SpriteImage {
   }
 }
 
-export default GameStatus
+
+
+export default GameStatus 

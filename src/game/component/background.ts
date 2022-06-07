@@ -1,17 +1,13 @@
 import SpriteImage from '../Image'
-// import { ctx } from '../../main'
+
 const cvs = document.getElementById('gamezone') as HTMLCanvasElement;
 const ctx = cvs.getContext('2d') as CanvasRenderingContext2D; 
 
 import sprite from '../sprite'
 export default class Background extends SpriteImage {
-  /** 精灵图位于canvas的横坐标 */
   public dX: number
-  /** 精灵图位于canvas的纵坐标 */
   public dY: number
-  /** 精灵图位于canvas的宽度 */
   public dWidth: number
-  /** 精灵图位于canvas的高度 */
   public dHeight: number
   constructor(
     sX: number,
@@ -29,7 +25,6 @@ export default class Background extends SpriteImage {
     this.dWidth = dWidth
     this.dHeight = dHeight
   }
-  /** 将图片绘制在canvas元素上 */
   public draw() {
     ctx.drawImage(
       sprite,

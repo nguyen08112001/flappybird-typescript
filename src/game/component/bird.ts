@@ -19,15 +19,15 @@ class Bird extends SpriteImage {
     public sY: number = 150;
     public birdimg = new Image();
 
-  public animation: ICoor[]
-  public radius: number
-  public frame: number
-  public gravity: number
-  public jump: number
-  public speed: number
-  public rotation: number
-  public period: number
-  constructor(sX: number, sY: number, width: number, height: number) {
+    public animation: ICoor[]
+    public radius: number
+    public frame: number
+    public gravity: number
+    public jump: number
+    public speed: number
+    public rotation: number
+    public period: number
+    constructor(sX: number, sY: number, width: number, height: number) {
     
     super(sX, sY, width, height)
     this.animation = [
@@ -66,11 +66,11 @@ class Bird extends SpriteImage {
     ctx.restore()
   }
   public update() {
-    /** 小鸟飞行速度 */
+    /** bird's speed */
     this.period = game.state.isGameReady() ? 10 : 5
-    /** 游戏每运行5帧，鸟运动1帧 */
+    /** skip frame*/
     this.frame += game.frame % this.period === 0 ? 1 : 0
-    /** 鸟的帧数每超过动画数组长度就归零 */
+    /** loop to frame 0 when overloaded */
     this.frame = this.frame % this.animation.length
 
     if (game.state.isGameReady()) {
@@ -86,12 +86,14 @@ class Bird extends SpriteImage {
           game.state.setGameOver()
         }
       }
-
+      console.log(this.speed)
       if (this.speed >= this.jump) {
-        this.rotation = 90 * DEGREE
+        this.rotation = Math.min(90 * DEGREE, this.speed * DEGREE * 10)
         this.frame = 1
-      } else {
-        this.rotation = -25 * DEGREE
+      }
+      else {
+        // this.rotation = -25 * DEGREE
+        this.rotation = Math.max(-25 * DEGREE, this.speed * DEGREE * 10)
       }
     }
   }

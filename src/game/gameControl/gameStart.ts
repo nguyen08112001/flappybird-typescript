@@ -15,5 +15,4 @@ function loop(){
 
     lastTime = time;
     requestAnimationFrame(loop);
-
 }
