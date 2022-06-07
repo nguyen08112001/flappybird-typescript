@@ -13,21 +13,22 @@ class InputManager {
     start() {
         document.addEventListener("keydown", event => {
             switch (game.state.current) {
+              case game.state.init:
+                game.state.setGameReady()
+                break
               case game.state.getReady:
                 game.state.setGaming()
                 break
               case game.state.gaming:
-                if (game.bird.sY - game.bird.radius <= 0) {
-                  game.state.setGameOver();
-                }
                 game.bird.flap()
                 break
               case game.state.gameOver:
                   game.pipe.reset()
                   game.bird.speedReset()
                   game.score.reset()
-                  game.state.setGameReady()
+                  game.state.setInit()
                 break
+              
             }
           })
     }

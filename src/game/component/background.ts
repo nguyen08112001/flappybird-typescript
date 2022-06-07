@@ -5,48 +5,49 @@ const ctx = cvs.getContext('2d') as CanvasRenderingContext2D;
 
 import sprite from '../sprite'
 export default class Background extends SpriteImage {
-  public dX: number
-  public dY: number
-  public dWidth: number
-  public dHeight: number
-  constructor(
-    sX: number,
-    sY: number,
-    width: number,
-    heigth: number,
-    dX: number,
-    dY: number,
-    dWidth: number,
-    dHeight: number
-  ) {
-    super(sX, sY, width, heigth)
-    this.dX = dX
-    this.dY = dY
-    this.dWidth = dWidth
-    this.dHeight = dHeight
-  }
-  public draw() {
-    ctx.drawImage(
-      sprite,
-      this.sX,
-      this.sY,
-      this.width,
-      this.height,
-      this.dX,
-      this.dY,
-      this.dWidth,
-      this.dHeight
-    )
-    ctx.drawImage(
-      sprite,
-      this.sX,
-      this.sY,
-      this.width,
-      this.height,
-      this.dX + this.width,
-      this.dY,
-      this.dWidth,
-      this.dHeight
-    )
-  }
+    public dX: number
+    public dY: number
+    public dWidth: number
+    public dHeight: number
+    constructor(
+        sX: number,
+        sY: number,
+        width: number,
+        height: number,
+        dX: number,
+        dY: number,
+        dWidth: number,
+        dHeight: number
+    ) {
+        super(sX, sY, width, height)
+        this.dX = dX
+        this.dY = dY
+        this.dWidth = dWidth
+        this.dHeight = dHeight
+    }
+    public draw() {
+        ctx.drawImage(
+            sprite,
+            this.sX,
+            this.sY,
+            this.width,
+            this.height,
+            this.dX,
+            this.dY,
+            this.dWidth,
+            this.dHeight
+        )
+        ctx.drawImage(
+            sprite,
+            this.sX,
+            this.sY,
+            this.width,
+            this.height,
+            this.dX + this.width,
+            this.dY,
+            this.dWidth,
+            this.dHeight
+        )
+
+    }
 }

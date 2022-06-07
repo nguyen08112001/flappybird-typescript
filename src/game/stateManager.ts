@@ -4,10 +4,15 @@ const ctx = cvs.getContext('2d') as CanvasRenderingContext2D;
 
 class state {
     public  current: number = 0
-    public  getReady: number = 0
-    public  gaming:number = 1
-    public  gameOver: number = 2
-    constructor(){}
+    public  init: number = 0
+    public  getReady: number = 1
+    public  gaming:number = 2
+    public  gameOver: number = 3
+    constructor(){
+    }
+    isInit() {
+        return this.current === this.init
+    }
     isGameReady() {
         return this.current === this.getReady
     }
@@ -16,6 +21,9 @@ class state {
     }
     isGameOver() {
         return this.current === this.gameOver
+    }
+    setInit() {
+        this.current = this.init
     }
     setGameReady() {
         this.current = this.getReady

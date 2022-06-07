@@ -13,20 +13,16 @@ class score {
         if (game.state.current === game.state.gaming) {
             ctx.lineWidth = 2
             ctx.font = '35px Teko'
-            // ctx.fillText('GAME SCORE: ' + this.value + '', cvs.width / 3, 50)
             ctx.strokeText('SCORE: ' + this.value + '', cvs.width / 2.5 , 50)
         } else if (game.state.current === game.state.gameOver) {
-        //   var img = new Image();
-        //   img.src = '../src/game/assets/images/gameOver.png';
-        //   ctx.drawImage(img, 0, 0,0,0,0,0,0,0)
 
             ctx.font = '25px Teko'
 
-            ctx.fillText(this.value + '', 225, 186)
-            ctx.strokeText(this.value + '', 225, 186)
+            ctx.fillText(this.value + '', 500, 205)
+            ctx.strokeText(this.value + '', 500, 205)
 
-            ctx.fillText(this.best + '', 225, 228)
-            ctx.strokeText(this.best + '', 225, 228)
+            ctx.fillText('' +this.best , 500, 260)
+            ctx.strokeText(''+ this.best , 500, 260)
         }
     }
     public updateScore() {
@@ -34,6 +30,8 @@ class score {
         this.value += 1
         this.best = Math.max(this.value, this.best)
         localStorage.setItem('best', this.best + '')
+        // localStorage.clear();
+        // sessionStorage.clear()
     }
 
     public reset() {

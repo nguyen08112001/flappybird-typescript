@@ -1,4 +1,3 @@
-// import { ctx, cvs } from '../../main'
 import sprite from '../sprite'
 import game from '../game'
 const cvs = document.getElementById('gamezone') as HTMLCanvasElement;
@@ -41,7 +40,6 @@ class Pipe {
     this.position.forEach(p => {
       const topYPosition = p.sY
       const bottomYPosition = p.sY + this.height + this.gap
-
       ctx.drawImage(
         sprite,
         this.top.sX,
@@ -81,9 +79,7 @@ class Pipe {
 
     this.position.forEach(p => {
       const bottomPipeYPosition = p.sY + this.height + this.gap
-      /** 碰撞检测 */
       if (
-        // 检测是否与顶部管道碰撞
         game.bird.sX + game.bird.radius > p.sX &&
         game.bird.sX - game.bird.radius < p.sX + this.width &&
         game.bird.sY + game.bird.radius > p.sY &&
@@ -92,7 +88,6 @@ class Pipe {
         game.state.setGameOver()
       }
       if (
-        // 检测是否与底部管道碰撞
         game.bird.sX + game.bird.radius > p.sX &&
         game.bird.sX - game.bird.radius < p.sX + this.width &&
         game.bird.sY + game.bird.radius > bottomPipeYPosition &&
@@ -101,12 +96,16 @@ class Pipe {
         game.state.setGameOver()
       }
 
+      if (p.sX === game.bird.sX) {
+        game.score.updateScore()
+      }
+
+      //pipe runs
       p.sX -= this.dX
 
+      //delete pipe when it ends
       if (p.sX + this.width <= 0) {
         this.position.shift()
-
-        game.score.updateScore()
       }
     })
   }
