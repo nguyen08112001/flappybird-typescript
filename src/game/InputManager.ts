@@ -1,4 +1,5 @@
-import game from './game'
+import game from './gameControl/GameCore'
+import { GameStart } from './scene';
 
 class InputManager {
 
@@ -13,24 +14,23 @@ class InputManager {
     start() {
         document.addEventListener("keydown", event => {
             switch (game.state.current) {
-              case game.state.init:
-                game.state.setGameReady()
-                break
-              case game.state.getReady:
-                game.state.setGaming()
-                break
-              case game.state.gaming:
-                game.bird.flap()
-                break
-              case game.state.gameOver:
-                  game.pipe.reset()
-                  game.bird.speedReset()
-                  game.score.reset()
-                  game.state.setInit()
-                break
-              
+                case game.state.init:
+                    game.state.setGameReady()
+                    break
+                case game.state.getReady:
+                    game.state.setGaming()
+                    break
+                case game.state.gaming:
+                    game.bird.flap()
+                    break
+                case game.state.gameOver:
+                    game.pipe.reset()
+                    game.bird.reset()
+                    game.score.reset()
+                    game.state.setInit()
+                    break
             }
-          })
+        })
     }
 
 

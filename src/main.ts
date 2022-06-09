@@ -1,3 +1,4 @@
-import game from './game/game'
+// import game from './game/game'
 
-game.loop()
+// game.loop()
+import './game/gameControl/GameStart'

@@ -1,6 +1,6 @@
 import SpriteImage from '../Image'
 import sprite from '../sprite'
-import game from '../game'
+import game from '../gameControl/GameCore'
 
 const cvs = document.getElementById('gamezone') as HTMLCanvasElement;
 const ctx = cvs.getContext('2d') as CanvasRenderingContext2D; 
@@ -14,7 +14,6 @@ class Bird extends SpriteImage {
     public height: number = 25;
     public sX: number = 276;
     public sY: number = 500;
-    public birdimg = new Image();
 
     public animation: ICoor[]
     public radius: number
@@ -33,8 +32,7 @@ class Bird extends SpriteImage {
             { sX: 276, sY: 164 },
             { sX: 276, sY: 139 }
         ]
-    
-        this.birdimg.src = 'images/bird.png';
+
         this.radius = 10
         this.frame = 0
         this.gravity = 0.25
@@ -52,8 +50,8 @@ class Bird extends SpriteImage {
                         -this.height / 2,this.width,this.height)
         ctx.restore()
     }
-    public update() {
-    /** bird's speed */
+    public update(time: any, delta: any) {
+        /** bird's speed */
         this.period = 10
 
         /** skip frame*/
@@ -66,7 +64,7 @@ class Bird extends SpriteImage {
             this.sY = 150
             this.rotation = 0 * DEGREE
         } else {
-            this.speed += this.gravity
+            this.speed += this.gravity 
             this.sY += this.speed
 
             if (this.sY + this.height / 2 >= cvs.height - game.foreground.height) {
@@ -80,7 +78,6 @@ class Bird extends SpriteImage {
                 this.frame = 1
             }
             else {
-                // this.rotation = -25 * DEGREE
                 this.rotation = Math.max(-25 * DEGREE, this.speed * DEGREE * 10)
             }
         }
@@ -89,8 +86,9 @@ class Bird extends SpriteImage {
         // FLAP.play()
         this.speed = -this.jump
     }
-    public speedReset() {
+    public reset(){
         this.speed = 0
+        game.bird.sY = 150
     }
 }
 

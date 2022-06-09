@@ -48,6 +48,5 @@ export default class Background extends SpriteImage {
             this.dWidth,
             this.dHeight
         )
-
     }
 }
