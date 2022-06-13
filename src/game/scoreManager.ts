@@ -18,11 +18,11 @@ class score {
 
             ctx.font = '25px Teko'
 
-            ctx.fillText(this.value + '', 500, 205)
-            ctx.strokeText(this.value + '', 500, 205)
+            ctx.fillText(this.value + '', 500 -10, 205)
+            ctx.strokeText(this.value + '', 500 -10, 205)
 
-            ctx.fillText('' +this.best , 500, 260)
-            ctx.strokeText(''+ this.best , 500, 260)
+            ctx.fillText('' +this.best , 500-10, 260)
+            ctx.strokeText(''+ this.best , 500-10, 260)
         }
     }
     public updateScore() {

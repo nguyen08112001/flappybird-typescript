@@ -8,10 +8,12 @@ const ctx = cvs.getContext('2d') as CanvasRenderingContext2D;
 const DEGREE = Math.PI / 180;
 
 import { ICoor } from '../../utils/vector';
+import ImageLoading from '../ImageLoading';
+import { CONSTANT } from '../../utils/contants';
 
 class Bird extends SpriteImage {
-    public width: number = 35;
-    public height: number = 25;
+    public width: number = 35;//35
+    public height: number = 25;//25
     public sX: number = 276;
     public sY: number = 500;
 
@@ -24,7 +26,7 @@ class Bird extends SpriteImage {
     public rotation: number
     public period: number
     constructor(sX: number, sY: number, width: number, height: number) {
-    
+        
         super(sX, sY, width, height)
         this.animation = [
             { sX: 276, sY: 112 },
@@ -33,7 +35,7 @@ class Bird extends SpriteImage {
             { sX: 276, sY: 139 }
         ]
 
-        this.radius = 10
+        this.radius = this.width/3
         this.frame = 0
         this.gravity = 0.25
         this.jump = 4.6
@@ -42,13 +44,24 @@ class Bird extends SpriteImage {
         this.period = 0
     }
     public draw() {
-        const bird = this.animation[this.frame]
-        ctx.save()
-        ctx.translate(this.sX, this.sY)
-        ctx.rotate(this.rotation)
-        ctx.drawImage(sprite,bird.sX,bird.sY,this.width,this.height,-this.width / 2,
-                        -this.height / 2,this.width,this.height)
-        ctx.restore()
+
+            const bird = this.animation[this.frame]
+            ctx.save()
+            ctx.translate(this.sX, this.sY)
+            ctx.rotate(this.rotation)
+            ctx.drawImage(sprite,bird.sX,bird.sY,this.width,this.height,-this.width / 2,
+                            -this.height / 2,this.width,this.height)      
+            ctx.restore()
+
+            // this.width = 70
+            // this.height = 50
+            // let bird = new Bird(50, 150, 34, 26)
+            // bird.image = ImageLoading.getInstance().getByName(CONSTANT.BLUEBIRDFRAME+this.frame.toString()).image;
+            // ctx.save()
+            // ctx.translate(this.sX, this.sY)
+            // ctx.rotate(this.rotation)
+            // ctx.drawImage(bird.image,-this.height/2,-this.width/2,this.width,this.height)
+            // ctx.restore()
     }
     public update(time: any, delta: any) {
         /** bird's speed */
@@ -59,6 +72,7 @@ class Bird extends SpriteImage {
 
         /** loop to frame 0 when overloaded */
         this.frame = this.frame % this.animation.length
+        // this.frame = this.frame % 7
 
         if (game.state.isInit()) {
             this.sY = 150
@@ -70,7 +84,7 @@ class Bird extends SpriteImage {
             if (this.sY + this.height / 2 >= cvs.height - game.foreground.height) {
                 this.sY = cvs.height - game.foreground.height - this.height / 2
                 if (game.state.isGaming()) {
-                game.state.setGameOver()
+                    game.state.setGameOver()
                 }
             }
             if (this.speed >= this.jump) {
@@ -83,10 +97,9 @@ class Bird extends SpriteImage {
         }
     }
     public flap() {
-        // FLAP.play()
         this.speed = -this.jump
     }
-    public reset(){
+    public reset() {
         this.speed = 0
         game.bird.sY = 150
     }

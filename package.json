@@ -19,6 +19,8 @@
     },
     "homepage": "https://github.com/iamshaunjp/webpack-and-typescript#readme",
     "devDependencies": {
+        "@types/javascript-color-gradient": "^2.4.0",
+        "javascript-color-gradient": "^2.4.4",
         "matter-js": "^0.18.0",
         "pixi.js": "^6.4.2",
         "ts-loader": "^6.2.2",

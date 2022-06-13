@@ -24,9 +24,6 @@ class InputManager {
                     game.bird.flap()
                     break
                 case game.state.gameOver:
-                    game.pipe.reset()
-                    game.bird.reset()
-                    game.score.reset()
                     game.state.setInit()
                     break
             }
