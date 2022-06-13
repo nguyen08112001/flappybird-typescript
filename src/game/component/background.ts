@@ -1,4 +1,6 @@
+import { CONSTANT } from '../../utils/contants';
 import SpriteImage from '../Image'
+import ImageLoading from '../ImageLoading';
 
 const cvs = document.getElementById('gamezone') as HTMLCanvasElement;
 const ctx = cvs.getContext('2d') as CanvasRenderingContext2D; 
@@ -48,5 +50,8 @@ export default class Background extends SpriteImage {
             this.dWidth,
             this.dHeight
         )
+
+        // ctx.drawImage(ImageLoading.getInstance().getByName(CONSTANT.CLOUD).image,0,0)    
+        // ctx.drawImage(ImageLoading.getInstance().getByName(CONSTANT.CLOUD).image,this.height/2,this.width/2,this.width/5,this.height/5)
     }
 }

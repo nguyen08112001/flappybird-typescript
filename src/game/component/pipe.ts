@@ -80,36 +80,36 @@ class Pipe extends SpriteImage {
         }
 
         this.position.forEach(p => {
-        const bottomPipeYPosition = p.sY + this.height + this.gap
-        if (
-            game.bird.sX + game.bird.radius > p.sX &&
-            game.bird.sX - game.bird.radius < p.sX + this.width &&
-            game.bird.sY + game.bird.radius > p.sY &&
-            game.bird.sY - game.bird.radius < p.sY + this.height
-        ) {
-            game.state.setGameOver()
-        }
-        if (
-            game.bird.sX + game.bird.radius > p.sX &&
-            game.bird.sX - game.bird.radius < p.sX + this.width &&
-            game.bird.sY + game.bird.radius > bottomPipeYPosition &&
-            game.bird.sY - game.bird.radius < bottomPipeYPosition + this.height
-        ) {
-            game.state.setGameOver()
-        }
+            const bottomPipeYPosition = p.sY + this.height + this.gap
+            if (
+                game.bird.sX + game.bird.radius > p.sX &&
+                game.bird.sX - game.bird.radius < p.sX + this.width &&
+                game.bird.sY + game.bird.radius > p.sY &&
+                game.bird.sY - game.bird.radius < p.sY + this.height
+            ) {
+                game.state.setGameOver()
+            }
+            if (
+                game.bird.sX + game.bird.radius > p.sX &&
+                game.bird.sX - game.bird.radius < p.sX + this.width &&
+                game.bird.sY + game.bird.radius > bottomPipeYPosition &&
+                game.bird.sY - game.bird.radius < bottomPipeYPosition + this.height
+            ) {
+                game.state.setGameOver()
+            }
 
-        if (p.sX <= game.bird.sX && game.bird.sX <= p.sX + this.dX) {
-            game.score.updateScore()
-        }
+            if (p.sX <= game.bird.sX && game.bird.sX <= p.sX + this.dX) {
+                game.score.updateScore()
+            }
 
-        //pipe runs
-        this.dX = this.dX + 0.005
-        p.sX -= this.dX
+            //pipe runs
+            this.dX = this.dX + 0.005
+            p.sX -= this.dX
 
-        //delete pipe when it ends
-        if (p.sX + this.width <= 0) {
-            this.position.shift()
-        }
+            //delete pipe when it ends
+            if (p.sX + this.width <= 0) {
+                this.position.shift()
+            }
         })
     }
 

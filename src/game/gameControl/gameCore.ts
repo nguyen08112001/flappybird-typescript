@@ -8,6 +8,7 @@ import state from '../stateManager'
 const cvs = document.getElementById('gamezone') as HTMLCanvasElement;
 const ctx = cvs.getContext('2d') as CanvasRenderingContext2D; 
 import { GameOver, GameStart } from '../scene'
+import Cloud from '../component/cloud'
 
 
 class gameCore {
@@ -21,12 +22,14 @@ class gameCore {
     public bird: Bird;
     public pipe: Pipe;
     public score: score;
+    public cloud: Cloud;
     
    
     constructor(){
 
         this.background = new Background(0, 0, 275, 226, 0, cvs.height - 226, 700, 226);
         this.foreground= new ForeGround(276,0,224,112,0,cvs.height - 112,900,200,2),
+        this.cloud= new Cloud(),
         this.state = new state();
         this.frame = 0;
         this.gameOver = new GameOver;
@@ -47,6 +50,7 @@ class gameCore {
         this.background.draw()
         this.pipe.draw()
         this.foreground.draw()
+        
         this.bird.draw()
         if (this.state.current === this.state.gameOver){
             GameOver.draw()
@@ -54,6 +58,7 @@ class gameCore {
         if (this.state.current === this.state.init) {
             GameStart.draw()
         }
+        this.cloud.draw()
         this.score.draw()
         
     }
@@ -63,6 +68,7 @@ class gameCore {
         this.foreground.update(time, delta)
         this.bird.update(time, delta)
         this.pipe.update(time, delta)
+        this.cloud.update(time, delta)
     }
 
     processInput() {
