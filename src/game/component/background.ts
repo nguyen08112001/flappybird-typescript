@@ -50,8 +50,5 @@ export default class Background extends SpriteImage {
             this.dWidth,
             this.dHeight
         )
-
-        // ctx.drawImage(ImageLoading.getInstance().getByName(CONSTANT.CLOUD).image,0,0)    
-        // ctx.drawImage(ImageLoading.getInstance().getByName(CONSTANT.CLOUD).image,this.height/2,this.width/2,this.width/5,this.height/5)
     }
 }

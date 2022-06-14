@@ -7,7 +7,6 @@ function preloadingimage() {
 
 	imageLoading.push(CONSTANT.BACKGROUND, 'images/img_background.png');
 	imageLoading.push(CONSTANT.GROUND, 'images/fg.png');
-
 	imageLoading.push(CONSTANT.BLUEBIRD, 'images/bird_0.png');
 	imageLoading.push(CONSTANT.BLUEBIRDFRAME + '0', 'images/bird_0.png');
 	imageLoading.push(CONSTANT.BLUEBIRDFRAME + '1', 'images/bird_1.png');

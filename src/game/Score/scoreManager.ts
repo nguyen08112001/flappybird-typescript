@@ -1,4 +1,4 @@
-import game from './gameControl/GameCore'
+import game from '../gameControl/GameCore'
 const cvs = document.getElementById('gamezone') as HTMLCanvasElement;
 const ctx = cvs.getContext('2d') as CanvasRenderingContext2D; 
 

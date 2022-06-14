@@ -72,11 +72,11 @@ class Pipe extends SpriteImage {
         if (!game.state.isGaming()) {
             return
         }
-        if (game.frame % 100 === 0) {
-        this.position.push({
-            sX: cvs.width,
-            sY: this.maxYposition * (Math.random() + 1)
-        })
+        if (game.frame === 100 || game.frame === 240) {
+            this.position.push({
+                sX: cvs.width,
+                sY: this.maxYposition * (Math.random() + 1)
+            })
         }
 
         this.position.forEach(p => {
@@ -100,6 +100,10 @@ class Pipe extends SpriteImage {
 
             if (p.sX <= game.bird.sX && game.bird.sX <= p.sX + this.dX) {
                 game.score.updateScore()
+                this.position.push({
+                    sX: cvs.width+this.dX*30,
+                    sY: this.maxYposition * (Math.random() + 1)
+                })
             }
 
             //pipe runs

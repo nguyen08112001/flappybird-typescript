@@ -1,5 +1,5 @@
-import game from './gameControl/GameCore'
-import { GameStart } from './scene';
+import game from '../gameControl/GameCore'
+import { GameStart } from '../scene';
 
 class InputManager {
 

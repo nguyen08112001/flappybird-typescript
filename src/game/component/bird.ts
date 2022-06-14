@@ -44,7 +44,8 @@ class Bird extends SpriteImage {
         this.period = 0
     }
     public draw() {
-
+            // game.bird.collider.debugRender();
+            // let sprite = game.bird.collider.getComponent()
             const bird = this.animation[this.frame]
             ctx.save()
             ctx.translate(this.sX, this.sY)
