@@ -1,25 +1,23 @@
-
-import Position from "../../utils/Position";
-import { Vec2 } from "../../utils/vector";
-import GameObject from "../GameObject";
+import MyComponent from "../MyComponent.js";
+import Position from "../../utils/Position.js";
+import { Vec2 } from '../../utils/vector';
 const cvs = document.getElementById('gamezone') as HTMLCanvasElement;
 const ctx = cvs.getContext('2d') as CanvasRenderingContext2D; 
-// import GameObject from "../GameObject.js";
-function isColor(check:any, color:any) {
+function isColor(check: any, color: any) {
     for(let i = 0; i < 4; i++) {
         if (check[i] != color[i]) return false
     }
     return true;
 }
-class BoxCollider extends GameObject {
+class BoxCollider extends MyComponent {
     constructor(myGameObject: any) {
-        super(myGameObject)
+        super(myGameObject);
     }
     getSize() {
-        // let sprite = this.gameObject.getComponent('Sprite');
-        // let w = sprite.image.width;
-        // let h = sprite.image.height;
-        return new Vec2(35,25);
+        let sprite = this.gameObject.getComponent('Sprite');
+        let w = sprite.image.width;
+        let h = sprite.image.height;
+        return new Vec2(w,h);
     }
     isTouch(col:any) {
         let thisRect = this.getRect();
@@ -49,19 +47,17 @@ class BoxCollider extends GameObject {
     }
     getRect(){
         let size = this.getSize()
-        // let center = this.gameObject.getComponent('Sprite').getCenter();
-        let center = new Vec2(35,25)
+        let center = this.gameObject.getComponent('Sprite').getCenter();
         size.x -= 5
         size.y -= 5
         return {
-            topleft: new Vec2(35,25),
-            // topleft: new Vec2(center.x-size.x/2, center.y-size.y/2),
+            topleft: new Vec2(center.x-size.x/2, center.y-size.y/2),
             center: center,
             width: size.x,
             height: size.y,
         }
     }
-    findOverlap(r1:any, r2:any){
+    findOverlap(r1: { topleft: any; center?: any; width: any; height: any; }, r2: { topleft: { x: number; y: number; }; width: any; height: any; }){
         let w = new Vec2(Math.max(r1.topleft.x, r2.topleft.x), Math.min(r1.topleft.x + r1.width, r2.topleft.x + r2.width))
 
         let h = new Vec2(Math.max(r1.topleft.y, r2.topleft.y), Math.min(r1.topleft.y + r1.height, r2.topleft.y + r2.height))

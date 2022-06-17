@@ -69,10 +69,10 @@ class Pipe extends SpriteImage {
     }
 
     public update(time: any, delta: any) {
-        if (!game.state.isGaming()) {
+        if (!game.scene.state.isGaming()) {
             return
         }
-        if (game.frame === 100 || game.frame === 240) {
+        if (game.frame % 100 === 0) {
             this.position.push({
                 sX: cvs.width,
                 sY: this.maxYposition * (Math.random() + 1)
@@ -82,32 +82,32 @@ class Pipe extends SpriteImage {
         this.position.forEach(p => {
             const bottomPipeYPosition = p.sY + this.height + this.gap
             if (
-                game.bird.sX + game.bird.radius > p.sX &&
-                game.bird.sX - game.bird.radius < p.sX + this.width &&
-                game.bird.sY + game.bird.radius > p.sY &&
-                game.bird.sY - game.bird.radius < p.sY + this.height
+                game.scene.bird.sX + game.scene.bird.radius > p.sX &&
+                game.scene.bird.sX - game.scene.bird.radius < p.sX + this.width &&
+                game.scene.bird.sY + game.scene.bird.radius > p.sY &&
+                game.scene.bird.sY - game.scene.bird.radius < p.sY + this.height
             ) {
-                game.state.setGameOver()
+                game.scene.state.setGameOver()
             }
             if (
-                game.bird.sX + game.bird.radius > p.sX &&
-                game.bird.sX - game.bird.radius < p.sX + this.width &&
-                game.bird.sY + game.bird.radius > bottomPipeYPosition &&
-                game.bird.sY - game.bird.radius < bottomPipeYPosition + this.height
+                game.scene.bird.sX + game.scene.bird.radius > p.sX &&
+                game.scene.bird.sX - game.scene.bird.radius < p.sX + this.width &&
+                game.scene.bird.sY + game.scene.bird.radius > bottomPipeYPosition &&
+                game.scene.bird.sY - game.scene.bird.radius < bottomPipeYPosition + this.height
             ) {
-                game.state.setGameOver()
+                game.scene.state.setGameOver()
             }
 
-            if (p.sX <= game.bird.sX && game.bird.sX <= p.sX + this.dX) {
-                game.score.updateScore()
-                this.position.push({
-                    sX: cvs.width+this.dX*30,
-                    sY: this.maxYposition * (Math.random() + 1)
-                })
+            if (p.sX === game.scene.bird.sX ) {
+            // if (p.sX <= game.scene.bird.sX && game.scene.bird.sX <= p.sX + this.dX) {
+                game.scene.score.updateScore()
+                // this.position.push({
+                //     sX: cvs.width+this.dX*30,
+                //     sY: this.maxYposition * (Math.random() + 1)
+                // })
             }
 
             //pipe runs
-            this.dX = this.dX + 0.005
             p.sX -= this.dX
 
             //delete pipe when it ends

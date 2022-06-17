@@ -31,10 +31,10 @@ export default class state {
         return this.current === this.gameOver
     }
     setInit() {
-        game.pipe.reset()
-        game.bird.reset()
-        game.score.reset()
-        game.frame = 0
+        game.scene.pipe.reset()
+        game.scene.bird.reset()
+        game.scene.score.reset()
+        game.scene.frame = 0
         this.current = this.init
     }
     setGameReady() {

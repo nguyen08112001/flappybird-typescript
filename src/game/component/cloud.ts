@@ -27,7 +27,7 @@ class Cloud extends SpriteImage {
     public update(time: any, delta: any) {
 
         this.position.forEach(p => {
-            if (game.state.current === game.state.gaming) {
+            if (game.scene.state.current === game.scene.state.gaming) {
                 p.sX -= this.moveX
             }
             if (p.sX + this.width <= 0) {
@@ -37,7 +37,7 @@ class Cloud extends SpriteImage {
 
 
         
-        if (Math.random() < 0.05 && game.state.current === state.getInstance().gaming) {
+        if (Math.random() < 0.05 && game.scene.state.current === state.getInstance().gaming) {
             this.position.push({
                 sX: cvs.width,
                 sY: 150 * (Math.random() + 1)

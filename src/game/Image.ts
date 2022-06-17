@@ -1,4 +1,4 @@
-import BoxCollider from "../libs/Objects/BoxCollider"
+import gamecore from "./gameControl/GameCore"
 // import GameObject from "../libs/GameObject"
 class SpriteImage {
     public sX: number
@@ -18,6 +18,12 @@ class SpriteImage {
 
     public setRotation(angle: number) {
         this.rotation = angle
+    }
+    public update(time: number, delta: number): void {
+        
+    }
+    public draw(): void {
+
     }
 }
 export default SpriteImage

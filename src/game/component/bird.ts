@@ -44,8 +44,6 @@ class Bird extends SpriteImage {
         this.period = 0
     }
     public draw() {
-            // game.bird.collider.debugRender();
-            // let sprite = game.bird.collider.getComponent()
             const bird = this.animation[this.frame]
             ctx.save()
             ctx.translate(this.sX, this.sY)
@@ -53,16 +51,6 @@ class Bird extends SpriteImage {
             ctx.drawImage(sprite,bird.sX,bird.sY,this.width,this.height,-this.width / 2,
                             -this.height / 2,this.width,this.height)      
             ctx.restore()
-
-            // this.width = 70
-            // this.height = 50
-            // let bird = new Bird(50, 150, 34, 26)
-            // bird.image = ImageLoading.getInstance().getByName(CONSTANT.BLUEBIRDFRAME+this.frame.toString()).image;
-            // ctx.save()
-            // ctx.translate(this.sX, this.sY)
-            // ctx.rotate(this.rotation)
-            // ctx.drawImage(bird.image,-this.height/2,-this.width/2,this.width,this.height)
-            // ctx.restore()
     }
     public update(time: any, delta: any) {
         /** bird's speed */
@@ -75,17 +63,17 @@ class Bird extends SpriteImage {
         this.frame = this.frame % this.animation.length
         // this.frame = this.frame % 7
 
-        if (game.state.isInit()) {
+        if (game.scene.state.isInit()) {
             this.sY = 150
             this.rotation = 0 * DEGREE
         } else {
             this.speed += this.gravity 
             this.sY += this.speed
 
-            if (this.sY + this.height / 2 >= cvs.height - game.foreground.height) {
-                this.sY = cvs.height - game.foreground.height - this.height / 2
-                if (game.state.isGaming()) {
-                    game.state.setGameOver()
+            if (this.sY + this.height / 2 >= cvs.height - game.scene.foreground.height) {
+                this.sY = cvs.height - game.scene.foreground.height - this.height / 2
+                if (game.scene.state.isGaming()) {
+                    game.scene.state.setGameOver()
                 }
             }
             if (this.speed >= this.jump) {
@@ -102,7 +90,10 @@ class Bird extends SpriteImage {
     }
     public reset() {
         this.speed = 0
-        game.bird.sY = 150
+        game.scene.bird.sY = 150
+    }
+    public test() {
+        console.log("birdtest")
     }
 }
 

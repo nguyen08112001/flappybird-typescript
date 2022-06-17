@@ -18,7 +18,7 @@ class ForeGround extends Background {
         this.moveX = moveX
     }
     public update(time: any, delta: any) {
-        if (game.state.current === game.state.gaming) {
+        if (game.scene.state.current === game.scene.state.gaming) {
             this.dX = (this.dX - this.moveX) % (this.width / 2)
         }
     }

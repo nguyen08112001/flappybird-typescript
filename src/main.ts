@@ -27,6 +27,7 @@ function preloadingimage() {
 	imageLoading.push(CONSTANT.GAMEREADY, 'images/getReady.png');
 	imageLoading.push(CONSTANT.SCOREBOARD, 'images/img_score_board.png');
 	imageLoading.push(CONSTANT.STARTBUTTON, 'images/startbutton.png');
+	imageLoading.push(CONSTANT.RESTARTBUTTON, 'images/restart-button.png');
 	imageLoading.push(CONSTANT.SILVER, 'images/img_silver.png');
 	imageLoading.push(CONSTANT.GOLD, 'images/img_gold.png');
 }

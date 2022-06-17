@@ -14,6 +14,7 @@ export class CONSTANT {
     public static readonly GAMEREADY = 'gameready';
     public static readonly SCOREBOARD = 'scoreboard';
     public static readonly STARTBUTTON = 'startbutton';
+    public static readonly RESTARTBUTTON = 'restartbutton';
     public static readonly SILVER = 'silver';
     public static readonly GOLD = 'gold';
   }
