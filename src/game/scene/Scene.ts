@@ -39,7 +39,7 @@ class Scene extends GameManager {
         this.bird = new Bird(50, 150, 34, 26);
         this.pipe =  new Pipe(53, 400);
         this.score = new Score();
-        super.addObject(
+        this.addObject(
             {
                 gameObject: this.background,
                 priority: 0
