@@ -77,12 +77,14 @@ class Scene extends GameManager {
     public startGame() {
         if (this.state.current === this.state.gaming){
             this.checkCollision()
+            this.cloud.generate()
+            // this
         }
     }
 
     public checkCollision(){
         
-        this.pipe.position.forEach(p => {
+        this.pipe.positionArray.forEach(p => {
             const bottomPipeYPosition = p.sY + this.pipe.height + this.pipe.gap
             if (
                 this.bird.sX + this.bird.radius > p.sX &&

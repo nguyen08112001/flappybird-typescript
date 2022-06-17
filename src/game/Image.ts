@@ -1,3 +1,4 @@
+import { Vec2, ICoor } from "../utils/vector"
 import gamecore from "./gameControl/GameCore"
 // import GameObject from "../libs/GameObject"
 class SpriteImage {
@@ -6,8 +7,7 @@ class SpriteImage {
     public width: number
     public height: number
     public rotation: number = 0
-    // public collider: any
-    protected image: any = null;
+    public position:  ICoor = {sX: 0, sY:  0 } ;
     constructor(sX: number, sY: number, width: number, height: number) {
         this.sX = sX
         this.sY = sY
@@ -24,6 +24,12 @@ class SpriteImage {
     }
     public draw(): void {
 
+    }
+    public pause(): void {
+
+    }
+    public getPosition(): ICoor {
+        return this.position
     }
 }
 export default SpriteImage

@@ -1,6 +1,6 @@
 export interface ICoor {
-sX: number
-sY: number
+    sX: number
+    sY: number
 }
 
 export class Vec2 {
