@@ -19,7 +19,7 @@ class Pipe extends SpriteImage {
     public gap: number
     public maxYposition: -150
     public dX: number
-    physic: Physic;
+    // physic: Physic;
     constructor(width:number, height: number) {
         super(0, 0, width, height)
         this.top = {
@@ -38,7 +38,7 @@ class Pipe extends SpriteImage {
         this.gap = 100
         this.maxYposition = -150
         this.dX = 2
-        this.physic = new Physic(this);
+        // this.physic = new Physic(this);
         this.physic.setVelocity(Math.round(cvs.width * 0.2), 0);
     }
 
@@ -103,12 +103,7 @@ class Pipe extends SpriteImage {
             }
 
             if (p.sX === game.scene.bird.position.sX ) {
-            // if (p.sX <= game.scene.bird.position.sX && game.scene.bird.position.sX <= p.sX + this.dX) {
                 game.scene.score.updateScore()
-                // this.position.push({
-                //     sX: cvs.width+this.dX*30,
-                //     sY: this.maxYposition * (Math.random() + 1)
-                // })
             }
 
             //pipe runs

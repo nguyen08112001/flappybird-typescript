@@ -3,8 +3,10 @@ import Background from "../component/background";
 import Bird from "../component/bird";
 import Cloud from "../component/cloud";
 import ForeGround from "../component/foreground";
-import Pipe from "../component/pipe";
-import gamecore from "../gameControl/GameCore";
+// import Pipe from "../component/pipe";
+import PipeUp from "../component/PipeUp";
+import PipeDown from "../component/PipeDown";
+import game from "../gameControl/GameCore";
 // import GameManager from "../GameManager";
 import GameStart from "./gameReady";
 import State from "../gameControl/stateManager"
@@ -24,9 +26,10 @@ class Scene extends GameManager {
     public gameOver: GameOver;
     public gameStart: GameStart;
     public bird: Bird;
-    public pipe: Pipe;
+    // public pipe: Pipe;
     public score: Score;
-
+    public pipes: Array<[PipeUp, PipeDown]>;
+    public timer!: NodeJS.Timeout;
     constructor() {
         super();
         this.background = new Background(0, 0, 275, 226, 0, cvs.height - 226, 700, 226);
@@ -37,8 +40,10 @@ class Scene extends GameManager {
         this.gameOver = new GameOver();
         this.gameStart = new GameStart();
         this.bird = new Bird(50, 150, 34, 26);
-        this.pipe =  new Pipe(53, 400);
+        // this.pipe =  new Pipe(53, 400);
+        this.pipes = [];
         this.score = new Score();
+        
         this.addObject(
             {
                 gameObject: this.background,
@@ -48,10 +53,10 @@ class Scene extends GameManager {
                 gameObject: this.cloud,
                 priority: 1
             }, 
-            {
-                gameObject: this.pipe,
-                priority: 2
-            },
+            // {
+            //     gameObject: this.pipe,
+            //     priority: 2
+            // },
             {
                 gameObject: this.foreground,
                 priority: 3
@@ -74,41 +79,71 @@ class Scene extends GameManager {
             },
         )
     }
+    public addPipes(): void {
+        let randomheight = -150 * (Math.random() + 1)
+        let pipeUp: PipeUp = new PipeUp(randomheight);
+        let pipeDown: PipeDown = new PipeDown(randomheight);
+        this.pipes.push([pipeUp, pipeDown]);
+        this.addObject(
+            {gameObject: pipeUp, priority: 2}, 
+            {gameObject: pipeDown, priority: 2}
+        );
+        // this.timer = setTimeout(() => this.addPipes(), 1500);
+    }
     public startGame() {
-        if (this.state.current === this.state.gaming){
-            this.checkCollision()
-            this.cloud.generate()
-            // this
-        }
+        this.cloud.generate()
     }
 
-    public checkCollision(){
-        
-        this.pipe.positionArray.forEach(p => {
-            const bottomPipeYPosition = p.sY + this.pipe.height + this.pipe.gap
+    public checkCollision() {
+
+        if (game.frame %100 === 0) {
+                this.addPipes()
+            }
+
+        for (let p of this.pipes) {
+            const bottomPipeYPosition = p[0].position.sY + 500
             if (
-                this.bird.sX + this.bird.radius > p.sX &&
-                this.bird.sX - this.bird.radius < p.sX + this.pipe.width &&
-                this.bird.sY + this.bird.radius > p.sY &&
-                this.bird.sY - this.bird.radius < p.sY + this.pipe.height
+                this.bird.position.sX + this.bird.radius > p[0].position.sX &&
+                this.bird.position.sX - this.bird.radius < p[0].position.sX + p[0].width &&
+                this.bird.position.sY + this.bird.radius > p[0].position.sY &&
+                this.bird.position.sY - this.bird.radius < p[0].position.sY + p[0].height
             ) {
                 this.state.setGameOver()
             }
             if (
-                this.bird.sX + this.bird.radius > p.sX &&
-                this.bird.sX - this.bird.radius < p.sX + this.pipe.width &&
-                this.bird.sY + this.bird.radius > bottomPipeYPosition &&
-                this.bird.sY - this.bird.radius < bottomPipeYPosition + this.pipe.height
+                this.bird.position.sX + this.bird.radius > p[0].position.sX &&
+                this.bird.position.sX - this.bird.radius < p[0].position.sX + p[0].width &&
+                this.bird.position.sY + this.bird.radius > bottomPipeYPosition &&
+                this.bird.position.sY - this.bird.radius < bottomPipeYPosition + p[0].height
             ) {
                 this.state.setGameOver()
             }
 
-            if (p.sX === this.bird.sX ) {
+            if (p[0].position.sX <= this.bird.position.sX && p[0].position.sX + 5 >= this.bird.position.sX ) {
                 this.score.updateScore()
             }
-        })
-    }
 
+            if(p[0].position.sX + p[0].width < 0) {
+                this.removePipe(p);
+            }
+            
+
+        }
+    }
+    public reset(){
+        for (let p of this.pipes) {
+            this.removeObject(p[0]);
+            this.removeObject(p[1]);
+        }
+        this.pipes = []
+        this.bird.reset()
+        this.score.reset()
+    }
+    private removePipe(pipe: [PipeUp, PipeDown]) {
+        this.removeObject(pipe[0]);
+        this.removeObject(pipe[1]);
+        this.pipes.splice(this.pipes.indexOf(pipe), 1);
+    }
 }
 
 

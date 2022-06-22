@@ -16,7 +16,7 @@ class Cloud extends SpriteImage {
     public moveX: number
 
     public positionArray: ICoor[]
-    physic: Physic;
+    // physic: Physic;
     constructor() {
         super(276,500,200,150)
         this.moveX = 1
@@ -24,13 +24,15 @@ class Cloud extends SpriteImage {
         this.sX=  0
         this.sY= Math.floor(Math.random() * 150)
         this.positionArray = []
-        this.physic = new Physic(this);
+        // this.physic = new Physic(this);
+        this.physic.setVelocity(200, 0)
     }
     public update(time: any, delta: any) {
 
         this.positionArray.forEach(p => {
             if (game.scene.state.current === game.scene.state.gaming) {
                 p.sX -= this.moveX
+                this.physic.update(time, -delta)
             }
             if (p.sX + this.width <= 0) {
                 this.positionArray.shift()

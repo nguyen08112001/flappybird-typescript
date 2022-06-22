@@ -31,10 +31,9 @@ export default class state {
         return this.current === this.gameOver
     }
     setInit() {
-        game.scene.pipe.reset()
-        game.scene.bird.reset()
-        game.scene.score.reset()
+        game.scene.reset()
         game.scene.frame = 0
+        game.scene.startGame()
         this.current = this.init
     }
     setGameReady() {
@@ -44,6 +43,10 @@ export default class state {
         this.current = this.gaming
     }
     setGameOver() {
+        game.scene.pipes.forEach((pipe) => {
+            pipe[0].pause();
+            pipe[1].pause();
+        });
         this.current = this.gameOver
     }
 }

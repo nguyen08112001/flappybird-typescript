@@ -20,7 +20,7 @@ function preloadingimage() {
 	imageLoading.push(CONSTANT.SPRITE, 'images/sprite.png');
 
 	imageLoading.push(CONSTANT.GREENPIPEDOWN, 'images/pipeNorth.png');
-	imageLoading.push(CONSTANT.GREENPIPEUP, 'images/pipeSouth');
+	imageLoading.push(CONSTANT.GREENPIPEUP, 'images/pipeSouth.png');
 
 	imageLoading.push(CONSTANT.CLOUD, 'images/cloud.png');
 	imageLoading.push(CONSTANT.GAMEOVER, 'images/gameOver.png');

@@ -12,5 +12,8 @@ export default class GameManager {
     public getObjects(): Array<{gameObject: SpriteImage, priority: number}> {
         return this.objects;
     }
+    public removeObject(gameObject: SpriteImage) {
+        this.objects = this.objects.filter((object) => object.gameObject != gameObject);
+    }
 
 }

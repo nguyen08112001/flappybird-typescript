@@ -12,11 +12,11 @@ class GameCore {
     constructor(){
         this.frame = 0;
         this.scene = new Scene();
-        this.scene.startGame();
+        this.scene.startGame()
         this.inputManager = inputManager;
     }
     ///render()
-    draw() {
+    public draw() {
         this.resetCanvas();
         for (let object of this.scene.getObjects())
             object.gameObject.draw();
@@ -31,6 +31,9 @@ class GameCore {
         this.frame++
         for (let object of this.scene.getObjects())
             object.gameObject.update(time, delta);
+        if (this.scene.state.isGaming()){
+            this.scene.checkCollision()
+        }
     }
 
     processInput() {

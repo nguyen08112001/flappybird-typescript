@@ -26,7 +26,7 @@ class Bird extends SpriteImage {
     public speed: number
     public rotation: number
     public period: number
-    physic: Physic;
+    // physic: Physic;
     constructor(sX: number, sY: number, width: number, height: number) {
         
         super(sX, sY, width, height)
@@ -44,7 +44,7 @@ class Bird extends SpriteImage {
         this.speed = 0
         this.rotation = 0
         this.period = 0
-        this.physic = new Physic(this);
+        // this.physic = new Physic(this);
         this.position.sX = 300
         this.position.sY = 150
     }
